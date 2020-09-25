@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.time.Duration
 
 private const val TAG = "MainActivity"
+private const val KEY_INDEX = "index"
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,32 +25,31 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prevButton: ImageButton
     private lateinit var questionTextView: TextView
 
-    private val questionBank = listOf(
-        Question(R.string.question_australia, true,2),
-        Question(R.string.question_oceans, true,2),
-        Question(R.string.question_mideast, false,2),
-        Question(R.string.question_africa, false,2),
-        Question(R.string.question_americas, true,2),
-        Question(R.string.question_asia, true,2))
 
+    //Using by lazy allows you to make the
+    //quizViewModel property a val instead of a var. This
+    //is great, because you only need (and want) to grab and
+    //store the QuizViewModel when the activity instance is
+    //created – so quizViewModel should only be assigned a
+    //value one time.
+    private val quizViewModel: QuizViewModel by lazy {
+        ViewModelProviders.of(this).get(QuizViewModel::class.java)
+    }
 
-    private var currentIndex = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG ,"onCreate() called" + currentIndex )
+        Log.d(TAG ,"onCreate() called"  )
         setContentView(R.layout.activity_main)
 
-        val provider: ViewModelProvider = ViewModelProviders.of(this)
-        val quizViewModel = provider.get(QuizViewModel::class.java)
-        Log.d(TAG, "Got a QuizViewModel: $quizViewModel")
-
+        val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
+        quizViewModel.currentIndex = currentIndex
 
         trueButton = findViewById(R.id.t_Button)
         falseButton = findViewById(R.id.f_Button)
         nextButton = findViewById(R.id.next_Button)
+        prevButton= findViewById(R.id.prev_Button)
         questionTextView = findViewById(R.id.question_text_view)
 
-        prevButton= findViewById(R.id.prev_Button)
         updateQuestion()
 
         trueButton.setOnClickListener{
@@ -61,25 +61,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener{
-            currentIndex = (currentIndex + 1) % questionBank.size
+            quizViewModel.moveToNext()
             updateQuestion()
         }
-
-
 
         questionTextView.setOnClickListener{
-            currentIndex = (currentIndex + 1) % questionBank.size
+            quizViewModel.moveToNext()
             updateQuestion()
         }
 
-
-
         prevButton.setOnClickListener{
-            if (currentIndex==0){
-                currentIndex =questionBank.size-1
-            }else {
-                currentIndex = (currentIndex - 1) % questionBank.size
-            }
+            quizViewModel.moveToPrev()
             updateQuestion()
         }
 
@@ -89,10 +81,11 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateQuestion() {
-        val questionTextResId = questionBank[currentIndex].textResId
+        //val questionTextResId = questionBank[currentIndex].textResId
+        val questionTextResId = quizViewModel.currentQuestionText
         question_text_view.setText(questionTextResId)
 
-        if(questionBank[currentIndex].answered <= 1){
+        if(quizViewModel.questionBank[quizViewModel.currentIndex].answered <= 1){
             trueButton?.isEnabled = false
             falseButton?.isEnabled = false
         }
@@ -102,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         }
 
       if(showFinalScore() != 0){
-          var scorePercent =Math.round((showFinalScore().toFloat() / questionBank.size.toFloat()) * 100.0f);
+          var scorePercent =Math.round((showFinalScore().toFloat() /   quizViewModel.questionBank.size.toFloat()) * 100.0f);
             Toast.makeText(this, "Your Final Score = " + showFinalScore() +"\n "
                     +scorePercent + "%", Toast.LENGTH_SHORT)
                 .show()
@@ -112,12 +105,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
-        val correctAnswer = questionBank[currentIndex].answer
+       // val correctAnswer = questionBank[currentIndex].answer
+        val correctAnswer = quizViewModel.currentQuestionAnswer
+
         val messageResId = if (userAnswer == correctAnswer) {
-            questionBank[currentIndex].answered = 1
+            quizViewModel.questionBank[quizViewModel.currentIndex].answered = 1
             R.string.correct_msg
         } else {
-            questionBank[currentIndex].answered = 0
+            quizViewModel.questionBank[quizViewModel.currentIndex].answered = 0
             R.string.inco_msg
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
@@ -131,7 +126,7 @@ class MainActivity : AppCompatActivity() {
     private fun showFinalScore() : Int
     {
         var mScore = 0;
-        for ( n in questionBank )
+        for ( n in quizViewModel.questionBank )
         {
             if (n.answered==2) {
                 mScore = 0;
@@ -145,24 +140,32 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        Log.d(TAG, "onSaveInstanceState  "  + quizViewModel.currentIndex)
+        savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
+    }
+
+
     override fun onStart() {
         super.onStart()
-        Log.d(TAG ,"onStart() called "  + currentIndex)
+        Log.d(TAG ,"onStart() called "  )
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG ,"onPause() called "  + currentIndex)
+        Log.d(TAG ,"onPause() called "  )
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.d(TAG ,"onRestart() called " + currentIndex )
+        Log.d(TAG ,"onRestart() called "  )
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG ,"onResume() called " + currentIndex)
+        Log.d(TAG ,"onResume() called " )
     }
 
     override fun onStop() {
@@ -184,6 +187,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG ,"onDestroy() called" )
-
     }
+
+
 }
