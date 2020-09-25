@@ -36,11 +36,16 @@
             />
 
     </LinearLayout>
-    <LinearLayout
+
+    <Button
+        android:id="@+id/cheat_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        >
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginTop="24dp"
+        android:text="@string/cheat_button" />
+
+
 
         <ImageButton
             android:id="@+id/prev_Button"
@@ -49,7 +54,8 @@
             android:background="@drawable/arrow_left"
 
             android:contentDescription="@string/next_button"
-            android:layout_margin="8dp"
+            android:layout_marginLeft="32dp"
+            android:layout_gravity="bottom|left"
             />
 
         <ImageButton
@@ -58,9 +64,11 @@
             android:layout_height="42dp"
             android:background="@drawable/arrow_right"
             android:contentDescription="@string/pre_button"
-            android:layout_margin="8dp"
+            android:layout_marginRight="32dp"
+            android:layout_gravity="bottom|right"
+
             />
-    </LinearLayout>
+
 
 
 

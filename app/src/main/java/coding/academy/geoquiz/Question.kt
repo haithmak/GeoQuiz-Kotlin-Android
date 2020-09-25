@@ -29,7 +29,4 @@ Int) of the string resource for a question.
 */
 data class Question(@StringRes val textResId: Int, val answer: Boolean , var answered: Int) {
 
-
-
-
 }
