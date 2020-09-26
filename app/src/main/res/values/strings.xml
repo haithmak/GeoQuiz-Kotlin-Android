@@ -17,11 +17,24 @@
     <string name="question_americas">The Amazon River is the longest river in the Americas.</string>
     <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
 
+    <string name="question_M_reserve">Bara\'a reserve located in Aden.</string>
+    <string name="question_M_seas">Read sea is in Hoddidah.</string>
+    <string name="question_M_mountain">Adan mountain is in Taiz.</string>
+    <string name="question_M_island">Soqatra Island is near to Aden.</string>
+    <string name="question_M_waterFall">Bani Mater Water Fall is near to Sana\'a.</string>
+    <string name="question_M_city">Aden is in south of Yemen.</string>
+
+    <string name="question_E_Japan">Japan located in Africa.</string>
+    <string name="question_E_Turkey">Turkey is in Asia only.</string>
+    <string name="question_E_Europe">Romania overlooking black sea.</string>
+    <string name="question_E_Cairo">Cairo is the capital city of Sudan</string>
+    <string name="question_E_Istanbul">Istanbul located in Turkey</string>
+    <string name="questiom_E_Yemne">Taiz is the Capital city of Yemen</string>
 
     <string name="incorrect_toast">Incorrect!</string>
     <string name="warning_text">Are you sure you want to do this?</string>
     <string name="show_answer_button">Show Answer</string>
-    <string name="cheat_button">Cheat!</string>
+    <string name="cheat_button">Cheat !</string>
     <string name="judgment_toast">Cheating is wrong.</string>
 
 

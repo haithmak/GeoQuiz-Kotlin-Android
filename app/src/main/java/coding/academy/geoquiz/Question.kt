@@ -27,6 +27,10 @@ developers.
 textResId variable will hold the resource ID (always an
 Int) of the string resource for a question.
 */
-data class Question(@StringRes val textResId: Int, val answer: Boolean , var answered: Int) {
+data class Question(   @StringRes val textResId: Int, val answer: Boolean , var answered: Int) {
+
+}
+
+data class Answar(   @StringRes val textResId: Int, val answer: Boolean , var answered: Int) {
 
 }

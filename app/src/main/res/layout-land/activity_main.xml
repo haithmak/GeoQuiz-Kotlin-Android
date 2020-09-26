@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
     <TextView
         android:id="@+id/question_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
         android:padding="24dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
         android:layout_gravity="center_horizontal"
         />
 
@@ -24,8 +29,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@string/true_button"
-            android:gravity=""
+            android:textColor="@android:color/white"
             />
+
+        <TextView
+            android:id="@+id/score_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:textSize="21sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/f_Button"
@@ -33,9 +47,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@string/false_button"
+            android:textColor="@android:color/white"
             />
 
+
+
+
+
     </LinearLayout>
+
+
 
     <Button
         android:id="@+id/cheat_button"
@@ -43,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginTop="24dp"
+        android:textColor="@android:color/white"
         android:text="@string/cheat_button" />
 
 

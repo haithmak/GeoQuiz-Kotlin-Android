@@ -7,15 +7,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:layout_margin="8dp"
     >
 
     <TextView
        android:id="@+id/question_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:padding="24dp"
+        android:padding="16dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
         />
 
     <LinearLayout
@@ -23,6 +26,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+
        >
 
         <Button
@@ -31,47 +35,68 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@string/true_button"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:background="@color/green"
             />
 
         <Button
+
             android:id="@+id/f_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@string/false_button"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@color/red"
             />
 
     </LinearLayout>
-    <Button
-        android:id="@+id/cheat_button"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/score_text_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/cheat_button" />
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:padding="24dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:text="Score"
+        android:textAlignment="center"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
         android:gravity="center"
+        android:orientation="horizontal"
         >
 
-    <ImageButton
-        android:id="@+id/prev_Button"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:background="@drawable/arrow_left"
+        <ImageButton
+            android:id="@+id/prev_Button"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/arrow_left"
+            android:contentDescription="@string/next_button" />
 
-        android:contentDescription="@string/next_button"
-        android:layout_margin="8dp"
-        />
+        <Button
+
+            android:id="@+id/cheat_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/cheat_button"
+            android:textColor="@android:color/white" />
 
         <ImageButton
             android:id="@+id/next_Button"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_margin="16dp"
             android:background="@drawable/arrow_right"
-            android:contentDescription="@string/pre_button"
-            android:layout_margin="8dp"
-            />
+            android:contentDescription="@string/pre_button" />
     </LinearLayout>
 </LinearLayout>
